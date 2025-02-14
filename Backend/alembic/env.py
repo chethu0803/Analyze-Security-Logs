@@ -4,16 +4,16 @@ from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import pool
 from alembic import context
-from models import Base  # Import your models
+from models import Base  
 from dotenv import load_dotenv
 
-# Load environment variables
+
 load_dotenv()
 
-# Read the DATABASE_URL from the .env file
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Convert async URL to sync URL for Alembic
+
 SYNC_DATABASE_URL = DATABASE_URL.replace("asyncpg", "psycopg2")
 
 # Alembic Config object
@@ -24,7 +24,7 @@ config.set_main_option("sqlalchemy.url", SYNC_DATABASE_URL)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Metadata for autogenerate support
+
 target_metadata = Base.metadata
 
 def run_migrations_offline():
